@@ -1,9 +1,33 @@
-<ion-header>
+<ion-header no-border [translucent]="true">
   <ion-toolbar>
-    <ion-title>tab1</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="beer-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      BarApp
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" color="light">
+  <!-- Refresh Page -->
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Restaurantes -->
+
+  <app-restaurantes [restaurantes]="restaurantes"></app-restaurantes>
+
+  <!-- InfiniteScroll -->
+
+  <ion-infinite-scroll [disabled]="!enableInfiniteScroll" threshold="150px" (ionInfinite)="nexts($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
