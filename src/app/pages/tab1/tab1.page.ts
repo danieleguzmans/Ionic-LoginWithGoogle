@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ContentfulService } from 'src/app/services/contentful/contentful.service';
+import { Entry } from 'contentful';
+
 
 @Component({
   selector: 'app-tab1',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab1Page implements OnInit {
 
-  constructor() { }
+  private restaurantes: Entry<any>[] = [];
+
+  constructor( private contentful: ContentfulService) { }
 
   ngOnInit() {
+
+    this.contentful.getRestaurantes()
+    .then( restaurantes => {
+      this.restaurantes = restaurantes;
+      console.log(restaurantes)
+    });
   }
 
 }
